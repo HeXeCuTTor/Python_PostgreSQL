@@ -114,28 +114,28 @@ def find_client_data(conn,name,surname,email,number):
         if email != '0':
             cur.execute("""SELECT clients_id FROM email WHERE email=%s;""", (email,))
             clients_id = cur.fetchone()[0]
-            cur.execute("""SELECT * FROM phone WHERE clients_id=%s;""", (clients_id,))
+            cur.execute("""SELECT number FROM phone WHERE clients_id=%s;""", (clients_id,))
             print(cur.fetchall())
-            cur.execute("""SELECT * FROM clients WHERE id=%s;""", (clients_id,))
-            print(cur.fetchone()[1:3])
+            cur.execute("""SELECT name,surname FROM clients WHERE id=%s;""", (clients_id,))
+            print(cur.fetchone())
             return
         elif number != '0':
             cur.execute("""SELECT clients_id FROM phone WHERE number=%s;""", (number,))
             clients_id = cur.fetchone()[0]
-            cur.execute("""SELECT * FROM email WHERE clients_id=%s;""", (clients_id,))
+            cur.execute("""SELECT email FROM email WHERE clients_id=%s;""", (clients_id,))
             print(cur.fetchall())
-            cur.execute("""SELECT * FROM phone WHERE clients_id=%s;""", (clients_id,))
+            cur.execute("""SELECT number FROM phone WHERE clients_id=%s;""", (clients_id,))
             print(cur.fetchall())
-            cur.execute("""SELECT * FROM clients WHERE id=%s;""", (clients_id,))
-            print(cur.fetchone()[1:3])
+            cur.execute("""SELECT name, surname FROM clients WHERE id=%s;""", (clients_id,))
+            print(cur.fetchone())
             return
         else:
             cur.execute("""SELECT id FROM clients WHERE name=%s AND surname=%s;""", (name,surname))
             clients_id = cur.fetchone()[0]
             print(clients_id)
-            cur.execute("""SELECT * FROM email WHERE clients_id=%s;""", (clients_id,))
+            cur.execute("""SELECT email FROM email WHERE clients_id=%s;""", (clients_id,))
             print(cur.fetchall())
-            cur.execute("""SELECT * FROM phone WHERE clients_id=%s;""", (clients_id,))
+            cur.execute("""SELECT number FROM phone WHERE clients_id=%s;""", (clients_id,))
             print(cur.fetchall())                        
 
 
