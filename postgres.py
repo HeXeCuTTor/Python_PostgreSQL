@@ -91,7 +91,8 @@ def delete_number(conn,name,surname):
         clients_id = cur.fetchone()[0]
         cur.execute("""DELETE FROM phone WHERE clients_id=%s;""", (clients_id,))
         cur.execute("""SELECT * FROM phone;""")
-        print(cur.fetchall()) 
+        print(cur.fetchall())
+        conn.commit() 
 
 def delete_clients_data(conn,name,surname):
     with conn.cursor() as cur:
@@ -107,6 +108,7 @@ def delete_clients_data(conn,name,surname):
         cur.execute("""SELECT * FROM clients;""")
         print(cur.fetchall())
         conn.commit()
+        
 def find_client_data(conn,name,surname,email,number):
     with conn.cursor() as cur:
         if email != '0':
